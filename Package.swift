@@ -9,6 +9,7 @@ let package = Package(
     .executable(name: "RiskGlass", targets: ["RiskGlassApp"])
   ],
   targets: [
-    .executableTarget(name: "RiskGlassApp")
+    .executableTarget(name: "RiskGlassApp"),
+    .testTarget(name: "RiskGlassTests", dependencies: ["RiskGlassApp"]),
   ]
 )
