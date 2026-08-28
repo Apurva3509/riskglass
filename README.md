@@ -9,7 +9,7 @@ downside risk, and market scenarios without uploading financial data.
 - Reproducible Monte Carlo risk simulation with percentile bands and value-at-risk
 - Transparent market and sector stress scenarios with holding-level attribution
 - Local market-regime research and Core ML experimentation
-- CSV import with no account or cloud service required
+- Validated CSV import with no account or cloud service required
 
 RiskGlass is an educational research tool, not financial advice.
 
@@ -18,6 +18,11 @@ RiskGlass is an educational research tool, not financial advice.
 The dashboard ships with a representative portfolio so the app is useful on
 first launch. All calculations run locally and the visual system uses only
 native SwiftUI and Swift Charts.
+
+Import a portfolio using the format in
+[`Examples/sample-portfolio.csv`](Examples/sample-portfolio.csv). Required
+columns are `symbol`, `name`, `sector`, `shares`, `average_cost`, and
+`current_price`.
 
 ## Development
 

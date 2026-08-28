@@ -1,8 +1,15 @@
 import Charts
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct DashboardView: View {
-  let portfolio: Portfolio
+  @State private var portfolio: Portfolio
+  @State private var isImporting = false
+  @State private var importStatus: String?
+
+  init(portfolio: Portfolio) {
+    _portfolio = State(initialValue: portfolio)
+  }
 
   var body: some View {
     ZStack {
@@ -22,6 +29,12 @@ struct DashboardView: View {
       }
     }
     .preferredColorScheme(.dark)
+    .fileImporter(
+      isPresented: $isImporting,
+      allowedContentTypes: [.commaSeparatedText, .plainText],
+      allowsMultipleSelection: false,
+      onCompletion: importPortfolio
+    )
   }
 
   private var background: some View {
@@ -55,10 +68,41 @@ struct DashboardView: View {
           .foregroundStyle(RiskGlassTheme.mutedText)
       }
       Spacer()
-      Button("Run analysis", systemImage: "sparkles") {}
-        .buttonStyle(.borderedProminent)
-        .tint(RiskGlassTheme.violet)
-        .controlSize(.large)
+      VStack(alignment: .trailing, spacing: 7) {
+        HStack {
+          Button("Import CSV", systemImage: "square.and.arrow.down") {
+            isImporting = true
+          }
+          .buttonStyle(.bordered)
+          Button("Run analysis", systemImage: "sparkles") {}
+            .buttonStyle(.borderedProminent)
+            .tint(RiskGlassTheme.violet)
+        }
+        if let importStatus {
+          Text(importStatus)
+            .font(.caption)
+            .foregroundStyle(RiskGlassTheme.mutedText)
+        }
+      }
+      .controlSize(.large)
+    }
+  }
+
+  private func importPortfolio(_ result: Result<[URL], Error>) {
+    do {
+      guard let url = try result.get().first else { return }
+      let canAccess = url.startAccessingSecurityScopedResource()
+      defer {
+        if canAccess { url.stopAccessingSecurityScopedResource() }
+      }
+      let content = try String(contentsOf: url, encoding: .utf8)
+      portfolio = try PortfolioCSVImporter().importPortfolio(
+        from: content,
+        name: url.deletingPathExtension().lastPathComponent
+      )
+      importStatus = "Imported \(portfolio.holdings.count) positions locally"
+    } catch {
+      importStatus = error.localizedDescription
     }
   }
 
