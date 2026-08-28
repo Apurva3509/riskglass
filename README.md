@@ -6,7 +6,7 @@ downside risk, and market scenarios without uploading financial data.
 ## Product direction
 
 - Native SwiftUI portfolio dashboard with allocation analytics
-- Reproducible Monte Carlo risk simulation
+- Reproducible Monte Carlo risk simulation with percentile bands and value-at-risk
 - Transparent scenario stress testing
 - Local market-regime research and Core ML experimentation
 - CSV import with no account or cloud service required
