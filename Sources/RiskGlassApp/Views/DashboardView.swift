@@ -16,6 +16,7 @@ struct DashboardView: View {
             HoldingsCard(portfolio: portfolio)
           }
           RiskLabCard(portfolio: portfolio)
+          StressTestCard(portfolio: portfolio)
         }
         .padding(32)
       }
