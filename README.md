@@ -32,6 +32,10 @@ swift build
 swift test
 ```
 
+Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md), the
+[security policy](SECURITY.md), and the project's
+[AI-assistance disclosure](AI_ASSISTANCE.md) before opening a pull request.
+
 ## License
 
 [MIT](LICENSE)
