@@ -13,6 +13,14 @@ downside risk, and market scenarios without uploading financial data.
 
 RiskGlass is an educational research tool, not financial advice.
 
+## Install
+
+Download the latest macOS archive from
+[GitHub Releases](https://github.com/Apurva3509/riskglass/releases), unzip it,
+and open `RiskGlass.app`. The current preview is ad-hoc signed and requires
+macOS 14 or later. If Gatekeeper blocks the first launch, control-click the app
+and choose **Open**.
+
 ## Current experience
 
 The dashboard ships with a representative portfolio so the app is useful on
@@ -30,7 +38,12 @@ columns are `symbol`, `name`, `sector`, `shares`, `average_cost`, and
 swift format --in-place --recursive Sources Tests Package.swift
 swift build
 swift test
+./scripts/package-app.sh
 ```
+
+Release packages are built from version tags. See [CHANGELOG.md](CHANGELOG.md)
+for notable changes and [the release guide](docs/RELEASING.md) for signing and
+notarization instructions.
 
 Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md), the
 [security policy](SECURITY.md), and the project's
